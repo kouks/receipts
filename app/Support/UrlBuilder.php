@@ -23,7 +23,7 @@ class UrlBuilder
 		return $this;
 	}
 
-	public function exact()
+	public function id()
 	{
 		$this->path[] = $this->urlable->id;
 

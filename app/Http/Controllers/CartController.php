@@ -9,12 +9,26 @@ use App\Models\Item;
 class CartController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Create a new controller instance.
      *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => ['list']
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
      * @return \Illuminate\Http\Response
+     *
      */
     public function index(Household $household)
     {
+        authorize('view', [Item::class, $household]);
+
         $cart = Item::where('household_id', $household->id)->orderBy('priority', 'desc')->get();
 
         return view('cart.index', compact('household', 'cart'));
@@ -27,6 +41,8 @@ class CartController extends Controller
      */
     public function create(Household $household)
     {
+        authorize('create', [Item::class, $household]);
+
         return view('cart.create', compact('household'));
     }
 
@@ -39,6 +55,8 @@ class CartController extends Controller
      */
     public function store(Household $household, Request $request)
     {
+        authorize('create', [Item::class, $household]);
+
         $this->validate($request, [
             'name'     => 'required',
             'priority' => 'required|numeric',
@@ -46,41 +64,7 @@ class CartController extends Controller
 
         $household->addItemToCart($request->all());
 
-        return back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        return back()->with('success', 'Item added to cart');;
     }
 
     /**
@@ -89,11 +73,13 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Household $household, $id)
     {
+        authorize('delete', [Item::class, $household]);
+
         Item::find($id)->delete();
 
-        return back();
+        return back()->with('success', 'Item purchased');
     }
 
     /**

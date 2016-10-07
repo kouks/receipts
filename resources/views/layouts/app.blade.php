@@ -30,6 +30,8 @@
         </div>
     </main>
 
+    @include('partials.messenger')
+
     @include('partials.footer')
 
     {{-- Scripts --}}

@@ -61,7 +61,7 @@
 
                 <p class="control">
                     <button class="button is-primary">Register</button>
-                    <a class="button is-white">Already have an account?</a>
+                    <a href="/login" class="button is-white">Already have an account?</a>
                 </p>
             </div>
         </form>

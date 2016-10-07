@@ -15,6 +15,5 @@
 
 @section('breadcrumbs')
 {!! app('breadcrumbs')
-    ->fragment('Home', '/')
     ->current('Households') !!}
 @stop

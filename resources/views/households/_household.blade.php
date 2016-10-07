@@ -20,17 +20,17 @@
 
         <footer class="card-footer">
             @can('view', $household)
-                <a class="card-footer-item" href="{{ $household->url()->exact() }}" >
+                <a class="card-footer-item" href="{{ $household->url()->id() }}" >
                     Visit {{ $household->name }}
                 </a>
 
                 @cannot('manage', $household)
-                    <a class="card-footer-item" href="{{ $household->url()->exact()->toggle() }}" >
+                    <a class="card-footer-item" href="{{ $household->url()->id()->toggle() }}" >
                         Leave
                     </a>
                 @endcan
             @else
-                <a class="card-footer-item" href="{{ $household->url()->exact()->toggle() }}" >
+                <a class="card-footer-item" href="{{ $household->url()->id()->toggle() }}" >
                     Join {{ $household->name }}
                 </a>
             @endcan

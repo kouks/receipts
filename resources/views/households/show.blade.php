@@ -59,7 +59,6 @@
 
 @section('breadcrumbs')
 {!! app('breadcrumbs')
-    ->fragment('Home', '/')
     ->fragment('Households', '/households')
     ->current($household->name) !!}
 @stop

@@ -32,16 +32,6 @@ class HouseholdsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -53,7 +43,7 @@ class HouseholdsController extends Controller
             $request->all()
         );
 
-        return back();
+        return back()->with('success', 'Household created');;
     }
 
     /**
@@ -64,32 +54,9 @@ class HouseholdsController extends Controller
      */
     public function show(Household $household)
     {
-        $this->authorize('view', $household);
+        authorize('view', $household);
 
         return view('households.show', compact('household'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**
@@ -113,6 +80,6 @@ class HouseholdsController extends Controller
     {
         auth()->user()->toggleHousehold($household);
 
-    	return back();
+    	return back()->with('success', 'You toggled the household');
     }
 }

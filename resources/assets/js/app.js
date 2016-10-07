@@ -18,3 +18,19 @@ require('./bootstrap');
 const app = new Vue({
     el: 'body'
 });
+
+/**
+ * Make the menu actually toggle.
+ */
+
+$('.nav-toggle').click(function() {
+  $(this).next().toggleClass('is-active');
+});
+
+/**
+ * Make the escape button work
+ */
+
+$('button.delete').click(function() {
+  $(this).parent().toggleClass('is-inactive');
+});

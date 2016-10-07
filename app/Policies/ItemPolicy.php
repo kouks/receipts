@@ -4,17 +4,18 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\Household;
+use App\Models\Item;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class HouseholdPolicy
+class ItemPolicy
 {
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view the household.
+     * Determine whether the user can view the item.
      *
      * @param  App\User  $user
-     * @param  App\Household  $household
+     * @param  App\Models\Hosehold  $household
      * @return mixed
      */
     public function view(User $user, Household $household)
@@ -23,25 +24,26 @@ class HouseholdPolicy
     }
 
     /**
-     * Determine whether the user can manage the household.
+     * Determine whether the user can create items.
      *
      * @param  App\User  $user
-     * @param  App\Household  $household
+     * @param  App\Models\Hosehold  $household
      * @return mixed
      */
-    public function manage(User $user, Household $household)
+    public function create(User $user, Household $household)
     {
-        return $user->ownsHousehold($household);
+        return $user->isInHousehold($household);
     }
 
     /**
-     * Determine whether the user can manage the household.
+     * Determine whether the user can delete the item.
      *
      * @param  App\User  $user
-     * @param  App\Household  $household
+     * @param  App\Item  $item
+     * @param  App\Models\Hosehold  $household
      * @return mixed
      */
-    public function repay(User $user, Household $household)
+    public function delete(User $user, Household $household)
     {
         return $user->isInHousehold($household);
     }

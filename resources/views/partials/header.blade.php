@@ -3,10 +3,6 @@
         <header class="nav">
             <div class="container">
                 <div class="nav-left">
-                    <a class="nav-item" href="/">
-                        Home
-                    </a>
-
                     <a class="nav-item" href="/households">
                         Households
                     </a>

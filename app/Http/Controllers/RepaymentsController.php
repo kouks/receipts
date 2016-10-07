@@ -18,6 +18,8 @@ class RepaymentsController extends Controller
      */
     public function index(Household $household, User $user)
     {
+        authorize('repay', $household);
+
         $receipts = Receipt::betweenUsers([$user->id, auth()->user()->id])->get();
 
         $amount = app('calculator')->forReceipts($receipts);
@@ -34,10 +36,12 @@ class RepaymentsController extends Controller
      */
     public function store(Household $household, User $user)
     {
+        authorize('repay', $household);
+
         $receipts = Receipt::betweenUsers([$user->id, auth()->user()->id])->get()->map(function ($receipt) {
             $receipt->pay();
         });
 
-        return redirect("/households/$household->id");
+        return redirect("/households/$household->id")->with('success', 'Successfully repaid');
     }
 }

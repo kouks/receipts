@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return redirect('/households');
 });
 
 Auth::routes();
@@ -28,7 +28,6 @@ Route::resource('households.receipts', 'ReceiptsController');
 Route::resource('households.cart', 'CartController');
 
 Route::get('households/{household}/toggle', 'HouseholdsController@toggle')->name('households.toggle');
-
 Route::get('households/{household}/repay/{user}', 'RepaymentsController@index')->name('repayements.index');
 Route::post('households/{household}/repay/{user}', 'RepaymentsController@store')->name('repayements.store');
 
@@ -36,4 +35,8 @@ Route::get('/cart/{household}', 'CartController@list');
 
 Route::get('/get', function () {
 	return App\Models\Household::all();
+});
+
+Route::get('/test', function () {
+	return redirect('/')->with('success', 'xD');
 });

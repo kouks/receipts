@@ -28,7 +28,6 @@
 
 @section('breadcrumbs')
 {!! app('breadcrumbs')
-    ->fragment('Home', '/')
     ->fragment('Households', '/households')
     ->fragment($household->name, "/households/$household->id")
     ->fragment('Cart', "/households/$household->id/cart")

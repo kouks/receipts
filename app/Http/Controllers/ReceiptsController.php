@@ -26,7 +26,7 @@ class ReceiptsController extends Controller
      */
     public function index(Household $household)
     {
-        $this->authorize('view', [Receipt::class, $household]);
+        authorize('view', [Receipt::class, $household]);
 
         $receipts = Receipt::where('paid', 0)->get();
 
@@ -41,6 +41,8 @@ class ReceiptsController extends Controller
      */
     public function create(Household $household)
     {
+        authorize('create', [Receipt::class, $household]);
+
         return view('receipts.create', compact('household'));
     }
 
@@ -53,7 +55,7 @@ class ReceiptsController extends Controller
      */
     public function store(Household $household, Request $request)
     {
-        $this->authorize('create', [Receipt::class, $household]);
+        authorize('create', [Receipt::class, $household]);
 
         $this->validate($request, [
             'name'          => 'required',
@@ -64,30 +66,7 @@ class ReceiptsController extends Controller
 
         $household->addReceipt($request->all());
 
-        return back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        return back()->with('success', 'Receipt added');;
     }
 
     /**
@@ -98,10 +77,10 @@ class ReceiptsController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize('delete', [Receipt::class, $household]);
+        authorize('delete', [Receipt::class, $household]);
 
         Receipt::find($id)->delete();
 
-        return back();
+        return back()->with('success', 'Receipt removed from database');;
     }
 }

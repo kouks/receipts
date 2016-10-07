@@ -39,8 +39,8 @@
 
                 <p class="control">
                     <button class="button is-primary">Login</button>
-                    <a class="button is-white">New account</a>
-                    <a class="button is-white">Resent password</a>
+                    <a href="/register" class="button is-white">New account</a>
+                    {{-- <a class="button is-white">Resent password</a> --}}
                 </p>
             </div>
         </form>
