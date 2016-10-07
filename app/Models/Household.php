@@ -67,7 +67,7 @@ class Household extends Model implements Urlable
 
         	$receipt->name 	        = $data['name'];
         	$receipt->description	= $data['description'];
-        	$receipt->value 	    = $data['value'] / (count($data['against']) + 1);
+        	$receipt->value 	    = $data['value'] / (count($data['against']));
         	$receipt->issuer_id 	= auth()->user()->id;
             $receipt->user_id 	    = $userId;
         	$receipt->household_id 	= $this->id;

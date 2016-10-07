@@ -50,7 +50,6 @@
     <label class="label">Issue against</label>
     <p class="control">
         @foreach ($household->users as $user)
-            @continue($user->id === auth()->user()->id)
             <p class="control">
                 <label class="checkbox">
                     <input

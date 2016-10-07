@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Models\Household;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:api');
+Route::get('households', function () {
+    return Household::with('users')->get();
+});

@@ -13,7 +13,11 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-// Vue.component('example', require('./components/Example.vue'));
+/**
+ * Let us now import all our Vue components.
+ */
+
+Vue.component('households', require('./components/Households.vue'));
 
 const app = new Vue({
     el: 'body'

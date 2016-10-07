@@ -20,7 +20,7 @@ class Item extends Model
      */
     public function user()
     {
-        return $this->BelongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -30,6 +30,6 @@ class Item extends Model
      */
     public function household()
     {
-        return $this->BelongsTo(Household::class);
+        return $this->belongsTo(Household::class);
     }
 }
