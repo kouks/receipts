@@ -1,0 +1,25 @@
+// Variables
+
+@import "variables";
+
+@import "node_modules/bulma/bulma.sass";
+
+// .is-indented-top {
+//   margin-top: 20px;
+// }
+//
+// .is-indented-bottom {
+//   margin-bottom: 20px;
+// }
+//
+// .has-padding {
+//   padding: 20px;
+// }
+
+.card-header.is-danger {
+  background: $danger;
+}
+
+.card-header.is-warning {
+  background: $warning;
+}

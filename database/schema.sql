@@ -1,0 +1,17 @@
+CREATE TABLE `users` (`id` integer not null primary key auto_increment, `name` varchar not null, `email` varchar not null, `password` varchar not null, `remember_token` varchar null, `created_at` datetime null, `updated_at` datetime null);
+CREATE UNIQUE INDEX `users_email_unique` on `users` (`email`);
+CREATE TABLE `password_resets` (`email` varchar not null, `token` varchar not null, `created_at` datetime null);
+CREATE INDEX `password_resets_email_index` on `password_resets` (`email`);
+CREATE INDEX `password_resets_token_index` on `password_resets` (`token`);
+CREATE TABLE `households` (`id` integer not null primary key auto_increment, `user_id` integer not null, `name` varchar not null, `slug` varchar not null, `created_at` datetime null, `updated_at` datetime null);
+CREATE INDEX `households_user_id_index` on `households` (`user_id`);
+CREATE TABLE `household_user` (`id` integer not null primary key auto_increment, `user_id` integer not null, `household_id` integer not null, `created_at` datetime null, `updated_at` datetime null);
+CREATE INDEX `household_user_user_id_index` on `household_user` (`user_id`);
+CREATE INDEX `household_user_household_id_index` on `household_user` (`household_id`);
+CREATE TABLE `receipts` (`id` integer not null primary key auto_increment, `issuer_id` integer not null, `user_id` integer not null, `household_id` integer not null, `name` varchar not null, `description` varchar not null, `value` numeric not null, `paid` tinyint(1) not null default '0', `created_at` datetime null, `updated_at` datetime null);
+CREATE INDEX `receipts_issuer_id_index` on `receipts` (`issuer_id`);
+CREATE INDEX `receipts_user_id_index` on `receipts` (`user_id`);
+CREATE INDEX `receipts_household_id_index` on `receipts` (`household_id`);
+CREATE TABLE `items` (`id` integer not null primary key auto_increment, `user_id` integer not null, `household_id` integer not null, `name` varchar not null, `priority` integer not null, `created_at` datetime null, `updated_at` datetime null);
+CREATE INDEX `items_user_id_index` on `items` (`user_id`);
+CREATE INDEX `items_household_id_index` on `items` (`household_id`);
