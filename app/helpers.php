@@ -1,7 +1,6 @@
 <?php
 
 if (! function_exists('authorize')) {
-
     /**
      * Authorization helper
      *
@@ -15,7 +14,7 @@ if (! function_exists('authorize')) {
     function authorize(
         $action,
         $arguments,
-        $redirectUrl = '/households',
+        $redirectUrl = '',
         $message = 'Unauthorized access',
         $messageType = 'danger'
     ) {

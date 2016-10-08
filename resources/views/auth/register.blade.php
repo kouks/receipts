@@ -71,6 +71,5 @@
 
 @section('breadcrumbs')
 {!! app('breadcrumbs')
-    ->fragment('Home', '/')
     ->current('Register') !!}
 @stop

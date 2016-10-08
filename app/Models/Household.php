@@ -63,6 +63,10 @@ class Household extends Model implements Urlable
     public function addReceipt(array $data)
     {
         foreach ($data['against'] as $userId) {
+            if (auth()->user()->id == $userId) {
+                continue;
+            }
+            
         	$receipt 				= new Receipt;
 
         	$receipt->name 	        = $data['name'];

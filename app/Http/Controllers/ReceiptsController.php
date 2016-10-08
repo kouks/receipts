@@ -28,7 +28,7 @@ class ReceiptsController extends Controller
     {
         authorize('view', [Receipt::class, $household]);
 
-        $receipts = Receipt::where('paid', 0)->get();
+        $receipts = Receipt::where('paid', 0)->orderBy('id', 'desc')->get();
 
         return view('receipts.index', compact('household', 'receipts'));
     }

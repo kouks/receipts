@@ -50,6 +50,5 @@
 
 @section('breadcrumbs')
 {!! app('breadcrumbs')
-    ->fragment('Home', '/')
     ->current('Login') !!}
 @stop
