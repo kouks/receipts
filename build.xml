@@ -40,7 +40,8 @@
         <echo>Creating Deployment-Folder</echo>
         <mkdir dir="${deploy.local_folder}" />
         <copy todir="${deploy.local_folder}">
-            <fileset dir="./" excludesfile="deploy_exclude.property" includesfile="deploy_include.property" />
+            <fileset dir="./" />
+            <!-- <fileset dir="./" excludesfile="deploy_exclude.property" includesfile="deploy_include.property" /> -->
         </copy>
     </target>
 
