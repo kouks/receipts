@@ -1,0 +1,1 @@
+mkdir root/subdomains/receipts

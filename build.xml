@@ -47,9 +47,7 @@
 
     <target name="copyDeployFolderToServer">
         <echo>Copying files to target ${deploy.target}</echo>
-        <exec command="ssh -o 'StrictHostKeyChecking no' -i travis vu3015@ares.wrongware.cz -p 2222" />
-        <exec command="mkdir root/subdomains/receipts" />
-        <!-- <exec dir="${deploy.local_folder}" command="scp -rv ./* $deploy.user@${deploy.target}:${deploy.location}" /> -->
+        <exec command="ssh -o 'StrictHostKeyChecking no' -i travis vu3015@ares.wrongware.cz -p 2222 'bash -s' < deploy.sh" />
     </target>
 
     <target name="syncDeployFolderToServer">
@@ -75,7 +73,7 @@
             <then>
                 <echo>Calling pre-deploy-script on target ${deploy.target}</echo>
                 <loadfile property="deploy.pre_deploy_script_content" file="${deploy.local_folder}/${deploy.pre_deploy_script}"/>
-                <exec command="ssh  -i ${deploy.identity_file} ${deploy.user}@${deploy.target} '${deploy.pre_deploy_script_content}'"/>
+                <exec command="ssh -i ${deploy.identity_file} ${deploy.user}@${deploy.target} '${deploy.pre_deploy_script_content}'"/>
             </then>
         </if>
     </target>
