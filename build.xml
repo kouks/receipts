@@ -31,12 +31,12 @@
  * @since     12.02.2015
  */
 -->
-<project name="phingdeploy" basedir="." default="">
+<project name="phingdeploy" basedir="." default="phingdeploy">
 
     <property file="./build.property"/>
     <!-- <property file="${phing.dir.phingdeploy}/config/build.property.dist"/> -->
 
-    <target name="phingdeploy.createDeployFolder">
+    <target name="createDeployFolder">
         <echo>Creating Deployment-Folder</echo>
         <mkdir dir="${deploy.local_folder}" />
         <copy todir="${deploy.local_folder}">
@@ -44,13 +44,13 @@
         </copy>
     </target>
 
-    <target name="phingdeploy.copyDeployFolderToServer">
+    <target name="copyDeployFolderToServer">
         <echo>Copying files to target ${deploy.target}</echo>
         <exec command="ssh -i ${deploy.identity_file} ${deploy.user}@${deploy.target} 'mkdir -p ${deploy.location}'" />
         <exec dir="${deploy.local_folder}" command="scp -rv ./* $deploy.user@${deploy.target}:${deploy.location}" />
     </target>
 
-    <target name="phingdeploy.syncDeployFolderToServer">
+    <target name="syncDeployFolderToServer">
         <echo>Synching files to target ${deploy.target}</echo>
         <exec command="ssh -i ${deploy.identity_file} ${deploy.user}@${deploy.target} 'mkdir -p ${deploy.location}'" />
         <filesync destinationDir="${deploy.user}@${deploy.target}:${deploy.location}"
@@ -61,12 +61,12 @@
                 />
     </target>
 
-    <target name="phingdeploy.callPostDeployScriptOnServer">
+    <target name="callPostDeployScriptOnServer">
         <echo>Calling post-deploy-script on target ${deploy.target}</echo>
         <exec command="ssh -i ${deploy.identity_file} ${deploy.user}@${deploy.target} '${deploy.location}/${deploy.post_deploy_script}'"/>
     </target>
 
-    <target name="phingdeploy.callPreDeployScriptOnServer" >
+    <target name="callPreDeployScriptOnServer" >
         <available property="deploy.pre_deploy_script_exists" file="${deploy.local_folder}/${deploy.pre_deploy_script}"/>
         <if>
             <isset property="deploy.pre_deploy_script_exists"/>
@@ -78,7 +78,7 @@
         </if>
     </target>
 
-    <target name="phingdeploy.deployFolderToServer">
+    <target name="deployFolderToServer">
         <if>
             <equals arg1="sync" arg2="${deploy.method}"/>
             <then>
@@ -93,20 +93,20 @@
         </if>
     </target>
 
-    <target name="phingdeploy.removeDeployFolder">
+    <target name="removeDeployFolder">
         <echo>Removing ${deploy.local_folder}</echo>
         <delete dir="${deploy.local_folder}" includeemptydirs="true"/>
     </target>
 
-    <target name="phingdeploy" depends="phingbuild.createDeployFolder,
-                                        phingbuild.callPreDeployScriptOnServer,
-                                        phingbuild.deployFolderToServer,
-                                        phingbuild.callPostDeployScriptOnServer,
-                                        phingbuild.removeDeployFolder">
+    <target name="phingdeploy" depends="createDeployFolder,
+                                        callPreDeployScriptOnServer,
+                                        deployFolderToServer,
+                                        callPostDeployScriptOnServer,
+                                        removeDeployFolder">
         <echo>Deploying application</echo>
     </target>
 
-    <target name="phingdeploy.install">
+    <target name="install">
         <copy todir=".">
             <fileset dir="${phing.dir.phingdeploy}/templates"/>
             <filterchain>
