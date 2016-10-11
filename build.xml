@@ -47,7 +47,7 @@
 
     <target name="copyDeployFolderToServer">
         <echo>Copying files to target ${deploy.target}</echo>
-        <exec command="ssh -o 'StrictHostKeyChecking no' -i travis vu3015@ares.wrongware.cz -p 2222 'bash -s' < deploy.sh" />
+        <exec command="ssh -o 'StrictHostKeyChecking no' -i travis vu3015@ares.wrongware.cz -p 2222 'bash -s' &lt; deploy.sh" />
     </target>
 
     <target name="syncDeployFolderToServer">
