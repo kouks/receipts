@@ -1,0 +1,11 @@
+compsoser install;
+npm install;
+mkdir -p storage/framework/{cache,views,sessions};
+touch database/database.sqlite;
+cp .env.production .env;
+php artisan key:generate;
+php artisan cache:clear;
+php artisan config:clear;
+php artisan view:clear;
+php artisan clear-compiled;
+php artisan migrate;
