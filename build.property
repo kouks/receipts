@@ -48,7 +48,7 @@ deploy.identity_file = ./travis
 ;; This script will be called BEFORE copying any files.
 ;; Use it for everything you need to do before copying the files like setting
 ;; a maintenance-page or creating a database-backup or whatever is needed
-deploy.pre_deploy_script = deploy_pre.sh
+;; deploy.pre_deploy_script = deploy_pre.sh
 ;;
 ;;
 ;; deploy.post_deploy_script

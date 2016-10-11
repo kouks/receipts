@@ -36,16 +36,6 @@
     <property file="./build.property"/>
     <!-- <property file="${phing.dir.phingdeploy}/config/build.property.dist"/> -->
 
-    <target name="phingdeploy.updatePhp">
-        <echo>Calling composer install</echo>
-        <composer command="install"/>
-    </target>
-
-    <target name="phingdeploy.updateAssets">
-        <echo>Calling bower install</echo>
-        <exec passthru="true" command="bower install"/>
-    </target>
-
     <target name="phingdeploy.createDeployFolder">
         <echo>Creating Deployment-Folder</echo>
         <mkdir dir="${deploy.local_folder}" />
@@ -108,8 +98,7 @@
         <delete dir="${deploy.local_folder}" includeemptydirs="true"/>
     </target>
 
-    <target name="phingdeploy" depends="phingbuild.updateAssets,
-                                        phingbuild.createDeployFolder,
+    <target name="phingdeploy" depends="phingbuild.createDeployFolder,
                                         phingbuild.callPreDeployScriptOnServer,
                                         phingbuild.deployFolderToServer,
                                         phingbuild.callPostDeployScriptOnServer,
