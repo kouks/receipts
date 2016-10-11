@@ -47,8 +47,9 @@
 
     <target name="copyDeployFolderToServer">
         <echo>Copying files to target ${deploy.target}</echo>
-        <exec command="ssh -i ${deploy.identity_file} ${deploy.user}@${deploy.target} 'mkdir -p ${deploy.location}'" />
-        <exec dir="${deploy.local_folder}" command="scp -rv ./* $deploy.user@${deploy.target}:${deploy.location}" />
+        <exec command="ssh -i travis vu3015@ares.wrongware.cz -p 2222" />
+        <exec command="mkdir root/subdomains/receipts" />
+        <!-- <exec dir="${deploy.local_folder}" command="scp -rv ./* $deploy.user@${deploy.target}:${deploy.location}" /> -->
     </target>
 
     <target name="syncDeployFolderToServer">
@@ -99,11 +100,7 @@
         <delete dir="${deploy.local_folder}" includeemptydirs="true"/>
     </target>
 
-    <target name="phingdeploy" depends="createDeployFolder,
-                                        callPreDeployScriptOnServer,
-                                        deployFolderToServer,
-                                        callPostDeployScriptOnServer,
-                                        removeDeployFolder">
+    <target name="phingdeploy" depends="copyDeployFolderToServer">
         <echo>Deploying application</echo>
     </target>
 
