@@ -31,7 +31,7 @@
  * @since     12.02.2015
  */
 -->
-<project name="phingdeploy" basedir="." >
+<project name="phingdeploy" basedir="." default="">
 
     <property file="./build.property"/>
     <!-- <property file="${phing.dir.phingdeploy}/config/build.property.dist"/> -->
