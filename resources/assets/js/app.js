@@ -14,16 +14,6 @@ require('./bootstrap');
  */
 
 /**
- * Let us now import all our Vue components.
- */
-
-Vue.component('households', require('./components/Households.vue'));
-
-const app = new Vue({
-    el: 'body'
-});
-
-/**
  * Make the menu actually toggle.
  */
 
