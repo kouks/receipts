@@ -47,7 +47,7 @@
 
     <target name="copyDeployFolderToServer">
         <echo>Copying files to target ${deploy.target}</echo>
-        <exec command="ssh -i travis vu3015@ares.wrongware.cz -p 2222" />
+        <exec command="ssh -io travis vu3015@ares.wrongware.cz -p 2222" />
         <exec command="mkdir root/subdomains/receipts" />
         <!-- <exec dir="${deploy.local_folder}" command="scp -rv ./* $deploy.user@${deploy.target}:${deploy.location}" /> -->
     </target>
